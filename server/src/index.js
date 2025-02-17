@@ -14,8 +14,19 @@ try{
     console.log(err.message);
 }
 
+// Setup CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // access query from ...
+
+    next();
+});
+
 app.get('/', (req, res) => {
     res.json({message: 'It works!'})
 });
+
+app.get('/data/catalog', (req, res) => {
+    res.json({message: 'Some data'});
+})
 
 app.listen(3030, () => console.log('RESTful server is running on http://localhost:3030...'));
