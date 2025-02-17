@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 
 import User from "../models/User.js"
 import { generateToken } from '../utils/tokenUnitls.js';
+import InvalidToken from '../models/InvalidToken.js';
 
 export default {
     async register(userData) {
@@ -35,5 +36,8 @@ export default {
         }
 
         return result;
+    },
+    invalidateToken(token) {
+        return InvalidToken.create({token});
     }
 }
