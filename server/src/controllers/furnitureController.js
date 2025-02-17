@@ -1,29 +1,36 @@
 import { Router } from "express";
+import furnitureService from "../service/furnitureService.js";
+import { isAuth } from "../middlewares/authMiddleware.js";
 
 const furnitureController = Router();
 
 // Get all
-furnitureController.get('/data/catalog', (req, res) => {
+furnitureController.get('/', async (req, res) => {
+    const furnitures = await furnitureService.getAll();
     res.json([]);
 });
 
 // Get one
-furnitureController.get('/data/catalog/:furnitureId', (req, res) => {
+furnitureController.get('/:furnitureId', (req, res) => {
     res.json([]);
 });
 
 // Create
-furnitureController.post('/data/catalog', (req, res) => {
-    res.json([]);
+furnitureController.post('/', isAuth, async (req, res) => {
+    const furnitureData = req.body;
+    const userId = req.user.id;
+
+    const newFurniture = await furnitureService.create(furnitureData, userId);
+    res.json(newFurniture);
 });
 
 // Update
-furnitureController.put('/data/catalog/:furnitureId', (req, res) => {
+furnitureController.put('/:furnitureId', (req, res) => {
     res.json([]);
 });
 
 // Delete
-furnitureController.delete('/data/catalog/:furnitureId', (req, res) => {
+furnitureController.delete('/:furnitureId', (req, res) => {
     res.json([]);
 });
 

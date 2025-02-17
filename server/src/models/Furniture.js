@@ -1,6 +1,6 @@
 import { Schema, model, Types } from "mongoose";
 
-const invalidTokenSchema = new Schema({
+const furnitureSchema = new Schema({
     make: {
         type: String,
         required: true,
@@ -24,8 +24,8 @@ const invalidTokenSchema = new Schema({
         type: Number,
         min: 0,
     },
-    imageUrl: {
-        type: Number,
+    img: {
+        type: String,
         required: true,
     },
     material: {
@@ -38,6 +38,6 @@ const invalidTokenSchema = new Schema({
     }
 });
 
-const InvalidToken = model('InvalidToken', invalidTokenSchema);
+const Furniture = model('Furniture', furnitureSchema);
 
-export default InvalidToken;
+export default Furniture;
