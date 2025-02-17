@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';    
 
 import routes from './routes.js';
+import { auth } from './middlewares/authMiddleware.js';
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
 */
 app.use(express.json());
 app.use(cors()); // access query
+app.use(auth)
 
 app.use(routes);
 
