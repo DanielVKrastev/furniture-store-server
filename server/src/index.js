@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 const app = express();
 
@@ -15,11 +16,14 @@ try{
 }
 
 // Setup CORS
+/*
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // access query from ...
+    res.header('Access-Control-Allow-Origin', '*'); // access query from ... (*) all
 
     next();
 });
+*/
+app.use(cors()); // access query
 
 app.get('/', (req, res) => {
     res.json({message: 'It works!'})
