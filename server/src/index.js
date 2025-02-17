@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors';
+import cors from 'cors';    
+
+import routes from './routes.js';
 
 const app = express();
 
@@ -15,7 +17,7 @@ try{
     console.log(err.message);
 }
 
-// Setup CORS
+// Setup CORS manual
 /*
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*'); // access query from ... (*) all
@@ -23,14 +25,9 @@ app.use((req, res, next) => {
     next();
 });
 */
+app.use(express.json());
 app.use(cors()); // access query
 
-app.get('/', (req, res) => {
-    res.json({message: 'It works!'})
-});
-
-app.get('/data/catalog', (req, res) => {
-    res.json({message: 'Some data'});
-})
+app.use(routes);
 
 app.listen(3030, () => console.log('RESTful server is running on http://localhost:3030...'));
