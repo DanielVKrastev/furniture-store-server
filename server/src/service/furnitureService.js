@@ -9,5 +9,8 @@ export default {
     },
     create(furnitureData, userId){
         return Furniture.create({...furnitureData, creator: userId});
-    }
+    },
+    update(furnitureId, furnitureData){
+        return Furniture.findByIdAndUpdate(furnitureId, furnitureData)
+    },
 }

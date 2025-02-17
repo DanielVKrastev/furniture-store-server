@@ -26,12 +26,16 @@ furnitureController.post('/', isAuth, async (req, res) => {
 });
 
 // Update
-furnitureController.put('/:furnitureId', (req, res) => {
-    res.json([]);
+furnitureController.put('/:furnitureId', async (req, res) => {
+    const furnitureId = req.params.furnitureId;
+    const furnitureData = req.body;
+    const updatedFurniture = await furnitureService.update(furnitureId, furnitureData);
+    res.json(updatedFurniture);
 });
 
 // Delete
 furnitureController.delete('/:furnitureId', (req, res) => {
+    const furnitureId = req.params.furnitureId;
     res.json([]);
 });
 

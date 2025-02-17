@@ -31,11 +31,9 @@ export default {
 
         const token = generateToken(user);
 
-        const result = {
+        return {
             user, token
-        }
-
-        return result;
+        };
     },
     invalidateToken(token) {
         return InvalidToken.create({token});
