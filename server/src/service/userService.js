@@ -5,8 +5,15 @@ import User from "../models/User.js"
 import { generateToken } from '../utils/tokenUnitls.js';
 
 export default {
-    register(userData) {
-        return User.create(userData);
+    async register(userData) {
+        const user = await User.create(userData);
+
+        const token = generateToken(user);
+
+        return {
+            user, token
+        };
+
     },
     async login(email, password){
         // if user exists
@@ -24,9 +31,7 @@ export default {
         const token = generateToken(user);
 
         const result = {
-            email,
-            accessToken: token,
-            _id: user.id,
+            user, token
         }
 
         return result;
