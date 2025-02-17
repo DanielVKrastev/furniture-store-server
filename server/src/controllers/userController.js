@@ -9,7 +9,16 @@ userController.post('/register', async (req, res) => {
     const createdUser = await userService.register(userData);
 
     //TODO: login
+    res.json({});
+    
+});
 
+userController.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    const loginUser = await userService.login(email, password);
+
+    //TODO: login
     res.json({});
     
 });
