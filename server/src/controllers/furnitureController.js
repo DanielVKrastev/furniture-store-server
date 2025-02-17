@@ -4,9 +4,28 @@ import { isAuth } from "../middlewares/authMiddleware.js";
 
 const furnitureController = Router();
 
+function buildFilter(query) {
+    const filterResult = Object.keys(query).reduce((filter, filterParam) => {
+        const filterParamValue = query[filterParam].replaceAll('"', '');
+
+        const searchParams = new URLSearchParams(filterParamValue);
+        
+        return { ...filter, ...Object.fromEntries(searchParams.entries()) };
+    }, {})
+
+    return filterResult
+};
+
 // Get all
 furnitureController.get('/', async (req, res) => {
-    const furnitures = await furnitureService.getAll();
+    //const furnitures = await furnitureService.getAll();
+    const query = req.query;
+
+    const filter = buildFilter(query);
+    console.log(filter);
+    
+    const furnitures = await furnitureService.getAll(filter);
+
     res.json(furnitures);
 });
 
