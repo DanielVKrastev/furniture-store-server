@@ -32,7 +32,7 @@ const furnitureSchema = new Schema({
         type: String,
         required: false,
     },
-    creator: {
+    _ownerId: {
         type: Types.ObjectId,
         ref: 'User',
     }

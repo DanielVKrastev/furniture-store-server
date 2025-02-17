@@ -7,12 +7,13 @@ const furnitureController = Router();
 // Get all
 furnitureController.get('/', async (req, res) => {
     const furnitures = await furnitureService.getAll();
-    res.json([]);
+    res.json(furnitures);
 });
 
 // Get one
-furnitureController.get('/:furnitureId', (req, res) => {
-    res.json([]);
+furnitureController.get('/:furnitureId', async (req, res) => {
+    const furniture = await furnitureService.getOne(req.params.furnitureId);
+    res.json(furniture);
 });
 
 // Create
