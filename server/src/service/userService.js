@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
-import jsonwebtoken from 'jsonwebtoken';
+
 
 import User from "../models/User.js"
-import { JWT_SECRET } from '../config.js';
+import { generateToken } from '../utils/tokenUnitls.js';
 
 export default {
     register(userData) {
@@ -10,7 +10,7 @@ export default {
     },
     async login(email, password){
         // if user exists
-        const user = await User.find({ email });
+        const user = await User.findOne({ email });
         if(! user){
             throw new Error('Email or password are incorrect!');
         }
@@ -21,15 +21,14 @@ export default {
             throw new Error('Email or password are incorrect!');
         }
 
-        // generate token
-        const payload = {
-            id: user.id,
-            email: user.email,
+        const token = generateToken(user);
+
+        const result = {
+            email,
+            accessToken: token,
+            _id: user.id,
         }
 
-        const token = jsonwebtoken.sign(payload, JWT_SECRET);
-
-        // return token
-        return token;
+        return result;
     }
 }

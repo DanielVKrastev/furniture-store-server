@@ -18,8 +18,7 @@ userController.post('/login', async (req, res) => {
 
     const loginUser = await userService.login(email, password);
 
-    //TODO: login
-    res.json({});
+    res.json(loginUser);
     
 });
 
